@@ -19,7 +19,8 @@ services:
     image: registry:latest
     volumes:
       - registry-data:/var/lib/registry
-      - ./registry-config/simple.yml:/etc/docker/registry/config.yml
+      - ./registry-config/credentials.yml:/etc/docker/registry/config.yml
+      - ./registry-config/htpasswd:/etc/docker/registry/htpasswd
 
   ui:
     image: joxit/docker-registry-ui:latest
