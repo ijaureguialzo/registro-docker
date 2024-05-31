@@ -1,0 +1,36 @@
+services:
+  https-portal:
+    image: steveltn/https-portal:${HTTPS_PORTAL_VERSION}
+    environment:
+      DOMAINS: >
+        registro-docker.test -> http://ui:80,
+      CLIENT_MAX_BODY_SIZE: 1024M
+      SERVER_NAMES_HASH_BUCKET_SIZE: 1024
+      STAGE: local
+    volumes:
+      - https-portal_certs:/var/lib/https-portal
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - ui
+
+  registry:
+    image: registry:latest
+    volumes:
+      - registry-data:/var/lib/registry
+      - ./registry-config/simple.yml:/etc/docker/registry/config.yml
+
+  ui:
+    image: joxit/docker-registry-ui:latest
+    environment:
+      - REGISTRY_TITLE=Egibide Docker
+      - NGINX_PROXY_PASS_URL=http://registry:5000
+      - SINGLE_REGISTRY=true
+      - DELETE_IMAGES=true
+    depends_on:
+      - registry
+
+volumes:
+  https-portal_certs:
+  registry-data:

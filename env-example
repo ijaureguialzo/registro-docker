@@ -1,0 +1,5 @@
+# Prefijo para los contenedores
+COMPOSE_PROJECT_NAME=registro-docker
+
+# Versiones de los contenedores
+HTTPS_PORTAL_VERSION=1
