@@ -32,6 +32,13 @@ services:
     depends_on:
       - registry
 
+  htpasswd:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    volumes:
+      - ./private:/data
+
 volumes:
   https-portal_certs:
   registry-data:
