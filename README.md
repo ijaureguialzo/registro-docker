@@ -2,6 +2,45 @@
 
 Registro de Docker privado con UI.
 
+## Prerrequisitos
+
+1. Instalar [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+2. En Windows, [instalar el comando `make`](https://github.com/ijaureguialzo/make-scoop-windows/blob/master/README.md).
+
+## Puesta en marcha
+
+1. Añadir las entradas necesarias al fichero _hosts_ del sistema:
+
+   En macOS y Linux:
+
+   ```shell
+   sudo bash -c '{
+   echo "127.0.0.1    registro-docker.test"
+   } >> /etc/hosts'
+   ```
+
+   En Windows (desde un terminal con privilegios de administrador):
+
+   ```powershell
+   (
+   echo 127.0.0.1    registro-docker.test
+   ) >> %SystemRoot%\System32\drivers\etc\hosts
+   ```
+
+2. Crear un usuario y contraseña de acceso al registro:
+
+    ```shell
+    make password
+    ```
+
+3. Arrancar el contenedor:
+
+    ```shell
+    make start
+    ```
+
+4. Acceder al [interfaz web del registro](https://registro-docker.test).
+
 ## Referencias
 
 - [Docker Registry User Interface](https://joxit.dev/docker-registry-ui/)
