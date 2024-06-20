@@ -19,7 +19,7 @@ Registro de Docker privado con UI.
    } >> /etc/hosts'
    ```
 
-   En Windows (desde un terminal con privilegios de administrador):
+   En Windows (desde un símbolo del sistema con privilegios de administrador):
 
    ```powershell
    (
@@ -27,19 +27,33 @@ Registro de Docker privado con UI.
    ) >> %SystemRoot%\System32\drivers\etc\hosts
    ```
 
-2. Crear un usuario y contraseña de acceso al registro:
+2. Copiar el fichero `env-example` a `.env`:
+
+   En macOS y Linux:
+
+   ```shell
+   cp env-example .env
+   ```
+
+   En Windows:
+
+   ```shell
+   copy env-example .env
+   ```
+
+3. Crear un usuario y contraseña de acceso al registro:
 
     ```shell
     make password
     ```
 
-3. Arrancar el contenedor:
+4. Arrancar el contenedor:
 
     ```shell
     make start
     ```
 
-4. Acceder al [interfaz web del registro](https://registro-docker.test).
+5. Acceder al [interfaz web del registro](https://registro-docker.test).
 
 ## Referencias
 
