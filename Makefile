@@ -30,7 +30,7 @@ _urls: _header
 	@echo ----------------------------------------------
 
 _touch_file:
-	@touch private/htpasswd
+	@docker compose run --rm htpasswd touch htpasswd
 
 password: _touch_file
 	@docker compose run --rm htpasswd clave-registro.sh
