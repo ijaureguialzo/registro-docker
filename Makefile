@@ -11,6 +11,7 @@ help: _header
 	${info }
 	@echo Opciones:
 	@echo ------------------------------------------
+	@echo password
 	@echo start / stop / restart
 	@echo gc
 	@echo logs / stats
@@ -28,7 +29,14 @@ _urls: _header
 	@echo [Registro Docker] https://registro-docker.test
 	@echo ----------------------------------------------
 
-_start-command:
+_touch_file:
+	@touch private/htpasswd
+
+password: _touch_file
+	@read -p "Username: " USER && read -s -p "Password: " PASS && docker run --rm -v "$(CURDIR)/private:/data" --entrypoint htpasswd httpd:2 -Bb /data/htpasswd $$USER $$PASS
+	@docker compose restart registry
+
+_start-command: _touch_file
 	@docker compose up -d --remove-orphans
 
 start: _header _start-command _urls
