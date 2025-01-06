@@ -13,6 +13,7 @@ help: _header
 	@echo ------------------------------------------
 	@echo password
 	@echo start / stop / restart
+	@echo start-traefik
 	@echo gc
 	@echo logs / stats
 	@echo clean
@@ -40,6 +41,11 @@ _start-command: _touch_file
 	@docker compose up -d --remove-orphans https-portal
 
 start: _header _start-command _urls
+
+_start-command-traefik: _touch_file
+	@docker compose -f docker-compose.yml -f docker-compose.traefik.yml up -d ui
+
+start-traefik: _header _start-command-traefik _urls
 
 stop:
 	@docker compose stop
