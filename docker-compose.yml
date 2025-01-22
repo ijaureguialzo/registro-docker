@@ -1,6 +1,7 @@
 services:
   https-portal:
     image: steveltn/https-portal:${HTTPS_PORTAL_VERSION}
+    stop_signal: SIGINT
     environment:
       DOMAINS: >
         registro-docker.test -> http://ui:80,
@@ -20,7 +21,6 @@ services:
     volumes:
       - registry-data:/var/lib/registry
       - ./registry-config/credentials.yml:/etc/docker/registry/config.yml
-      - ./private/htpasswd:/etc/docker/registry/htpasswd
 
   ui:
     image: joxit/docker-registry-ui:latest
@@ -29,6 +29,10 @@ services:
       - NGINX_PROXY_PASS_URL=http://registry:5000
       - SINGLE_REGISTRY=true
       - DELETE_IMAGES=true
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./private/read.htpasswd:/etc/nginx/auth/read.htpasswd
+      - ./private/write.htpasswd:/etc/nginx/auth/write.htpasswd
     depends_on:
       - registry
 
