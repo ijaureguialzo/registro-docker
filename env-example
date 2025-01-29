@@ -6,3 +6,6 @@ HTTPS_PORTAL_VERSION=1
 
 # URL de acceso para Traefik
 FQDN_REGISTRO=registro-docker.test
+
+# Mostrar el icono de borrado
+DELETE_IMAGES=false
