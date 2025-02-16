@@ -1,6 +1,7 @@
 services:
   ui:
     labels:
+      - "traefik.enable=true"
       - "traefik.http.routers.registro-ui.rule=Host(`${FQDN_REGISTRO:-registro-docker.test}`)"
       - "traefik.http.routers.registro-ui.entrypoints=websecure"
       - "traefik.http.routers.registro-ui.tls=true"
