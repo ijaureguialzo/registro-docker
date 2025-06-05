@@ -5,6 +5,7 @@ services:
       - "traefik.http.routers.registro-ui.rule=Host(`${FQDN_REGISTRO:-registro-docker.test}`)"
       - "traefik.http.routers.registro-ui.entrypoints=websecure"
       - "traefik.http.routers.registro-ui.tls=true"
+      - "traefik.http.services.registro-ui.loadbalancer.server.port=80"
     restart: unless-stopped
 
   registry:
